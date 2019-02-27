@@ -1,7 +1,7 @@
 const test = () => {
 	return {
 		skrik: () => {
-			alert('jag funkar! ');
+			//alert('jag funkar! ');
 		},
 		alfvalue: 'detta är ett simpelt värde!'
 	};

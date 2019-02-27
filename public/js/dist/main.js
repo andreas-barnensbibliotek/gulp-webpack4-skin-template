@@ -58,14 +58,14 @@
     return __webpack_require__(__webpack_require__.s = "./assets/js/main.js");
 })({
     "./assets/js/components/old.js": function(module, exports) {
-        eval("module.exports = {\n  testarold: function testarold(msg) {\n    alert(msg);\n  }\n};\n\n//# sourceURL=webpack:///./assets/js/components/old.js?");
+        eval("module.exports = {\n  testarold: function testarold(msg) {//alert(msg);\n  }\n};\n\n//# sourceURL=webpack:///./assets/js/components/old.js?");
     },
     "./assets/js/components/test.js": function(module, __webpack_exports__, __webpack_require__) {
         "use strict";
-        eval("const hello = () => {\n  return {\n    skrik: () => {\n      alert('Hello2! ');\n    },\n    alfvalue: 'detta är ett simpelt värde från hello test!'\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"a\"] = (hello);\n\n//# sourceURL=webpack:///./assets/js/components/test.js?");
+        eval("const hello = () => {\n  return {\n    skrik: () => {//alert('Hello2! ');\n    },\n    alfvalue: 'detta är ett simpelt värde från hello test!'\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"a\"] = (hello);\n\n//# sourceURL=webpack:///./assets/js/components/test.js?");
     },
     "./assets/js/main.js": function(module, __webpack_exports__, __webpack_require__) {
         "use strict";
-        eval('__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_test__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/test */ "./assets/js/components/test.js");\n\n\nvar dt = __webpack_require__(/*! ./components/old */ "./assets/js/components/old.js");\n\nlet ny = Object(_components_test__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])();\nconsole.log(ny.skrik());\nalert(ny.alfvalue);\ndt.testarold(\'funkar detta\');\n\n//# sourceURL=webpack:///./assets/js/main.js?');
+        eval('__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_test__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/test */ "./assets/js/components/test.js");\n\n\nvar dt = __webpack_require__(/*! ./components/old */ "./assets/js/components/old.js");\n\nlet ny = Object(_components_test__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(); //console.log(ny.skrik());\n//alert(ny.alfvalue);\n//dt.testarold(\'funkar detta\');\n\n//# sourceURL=webpack:///./assets/js/main.js?');
     }
 });

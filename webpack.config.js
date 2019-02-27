@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const webpack = require('webpack');
 const UglifyJS = require('uglify-es');
 
 const DefaultUglifyJsOptions = UglifyJS.default_options();
@@ -19,8 +20,8 @@ module.exports = env => {
 			main: './assets/js/main.js'
 		},
 		output: {
-			path: path.resolve(__dirname, 'public/js/dist'),
-			filename: '[name].js' // '[name].[chunkhash].js' put this if you want to get hashed files to cache bust
+            path: path.resolve(__dirname, 'assets/jsbundle'),
+			filename: 'main.js' // '[name].[chunkhash].js' put this if you want to get hashed files to cache bust
 		},
 		module: {
 			rules: [
@@ -45,7 +46,10 @@ module.exports = env => {
 			//new CleanWebpackPlugin('public/js/dist', {}),
 			new MiniCssExtractPlugin({
 				filename: 'styles.css' // 'style.[contenthash].css' put this if you want to get hashed files to cache bust
-			}),
+            }),
+            new webpack.ProvidePlugin({
+                _: "lodash"
+            }),
 			// new HtmlWebpackPlugin({
 			// 	inject: false,
 			// 	hash: true,

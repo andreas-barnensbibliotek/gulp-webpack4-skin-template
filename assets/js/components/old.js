@@ -1,5 +1,5 @@
 module.exports = {
 	testarold: function(msg) {
-		alert(msg);
+		return 'detta �r ett meddelande ' + msg;
 	}
 };
