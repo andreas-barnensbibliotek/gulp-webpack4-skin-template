@@ -49,7 +49,11 @@ module.exports = env => {
             }),
             new webpack.ProvidePlugin({
                 _: "lodash"
-            }),
+			}),
+			new webpack.ProvidePlugin({
+				$: "jquery",
+				jQuery: "jquery"
+			}),
 			// new HtmlWebpackPlugin({
 			// 	inject: false,
 			// 	hash: true,

@@ -3,7 +3,7 @@ const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
 const concat = require('gulp-concat');
 const sourcemaps = require('gulp-sourcemaps');
-let exec = require('child_process').exec;
+const exec = require('child_process').exec;
 
 let srcPath = {
     'scss': './_dev/devsass',
@@ -34,7 +34,7 @@ gulp.task('jsconcatfiles', function () {
         ]
     )   
         
-        .pipe(concat('aj_bb_katalogenbundle.1.0.0.js'))        
+        .pipe(concat('aj_bokemonspel.2.0.js'))        
         .pipe(gulp.dest(srcPath.publik + '/js/'));
     
 });

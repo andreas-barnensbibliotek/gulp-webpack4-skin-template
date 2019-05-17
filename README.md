@@ -1,4 +1,8 @@
 # Dev-Starter-Kit
+Detta är bokemonspel_v2 som är gjord med hjälpa av denna git template:
+1
+0 0 andreas-barnensbibliotek/gulp-webpack4-skin-template
+
 ANDREAS ÄNDRADE DETTA
     //"webpack-md5-hash": "0.0.6", bytte denna mot nedan och ändrade i webpack config
 So I built this for all the new web developers... My Goal is to save you time from the bullsh*t of spending hours looking for ways to speed up your learning. Sometimes all we want to do is just code.
@@ -21,14 +25,24 @@ I broke it down in simple steps to get you going.
  **Install all the node packages** 
 On the root of this project run on your terminal (if you want you can do this with yarn but thats optional)
 ```bash
-    sudo npm install har-validator@latest --save-dev
-    sudo npm install
-    sudo npm install gulp-cli -g
-    sudo npm install gulp@3.9.1 -g 
-    sudo npm install webpack@4.25.1 -g
-    sudo npm install webpack-cli@3.1.2 -g
+    npm install har-validator@latest --save-dev
+    npm install
+    npm install gulp-cli -g
+    npm install gulp@3.9.1 -g 
+    npm install webpack@4.25.1 -g
+    npm install webpack-cli@3.1.2 -g
 ```
+npm install gulp gulp-sass gulp-autoprefixer gulp-concat gulp-sourcemaps --dev-save
+npm install child_process node-sass -save
+npm i jquery --save
 
+
+plugins: [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    })
+  ]
 **Start the dev server**
 ```bash
   npm run watch
