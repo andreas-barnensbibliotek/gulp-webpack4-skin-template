@@ -6,12 +6,141 @@ Author URI: http://www.os-templates.com/
 Licence: <a href="http://www.os-templates.com/template-terms">Website Template Licence</a>
 */
 
-
-@import url('https://fonts.googleapis.com/css?family=Baloo|Hind+Siliguri|Questrial|Roboto');
-/*@import url(public/css/external/fontawesome_all.css);*/
-/*@import url(public/css/bootstrap-grid.css);*/
-@import url(public/css/styles.css);
-
-@import url(layout/styles/main.css);
-@import url(layout/styles/mediaqueries.css);
-@import url(layout/styles/slicknav.css);
+html {
+    overflow:   scroll;
+  }
+  ::-webkit-scrollbar {
+      width: 0px;
+      background: transparent; /* make scrollbar transparent */
+  }
+  body {
+    background: lightblue;
+    background-image: url("https://www.barnensbibliotek.se/Portals/_default/Skins/bb_BALNAB/images/Nalle_Barnensbibliotek_bg_2.jpg");
+    font-family: "Ubuntu Condensed", sans-serif;
+  }
+  #maincontainer{
+    max-width: 400px;
+      margin: auto; 
+      position: relative;
+      display:flex;
+    border:1px solid #000;
+    border-bottom:10px solid #000;
+    /* background:#ccc; */
+   
+    overflow:hidden;
+   
+  }
+  .blink {
+    animation: blink 0.5s linear;
+  }
+  
+  .score-life-container {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 200px;
+  }
+  
+  .score {
+    font-size: 2em;
+    color: yellow;
+    background: black;
+    padding: 2px;
+    text-align: center;
+    display: inline;
+    margin-right: 10px;
+  }
+  
+  .life {
+    width: 1.5em;
+    height: 1.5em;
+    background: yellow;
+    display: inline-block;
+    margin-left: 3px;
+  }
+  
+  .game-over-wrapper , .game-win-wrapper {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    scrollbar-width: none;
+     
+  }
+  
+  .game-over {
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .game-over__start {
+    color: green;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  .game-over__message {
+    color: red;
+    font-size: 4em;
+    text-align: center;
+  }
+  
+  .game-over__restart {
+    color: yellow;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  
+  .hamburguer {
+    position: absolute;
+    top: -40px;
+    transform: translate(-50%);
+    font-size: 3em;
+    cursor: pointer;
+    padding: 20px;
+  }
+  
+  .hamburguer--down {
+    animation: down 2.5s linear;
+  }
+  
+  .hamburguer--up {
+    animation-name: up;
+    animation-timing-function: linear;
+  }
+  
+  @keyframes down {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      top: 100%;
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes up {
+    from {
+      top: 50%;
+      transform: rotate(0deg);
+    }
+    to {
+      top: -50%;
+      transform: rotate(90deg);
+      font-size: 6em;
+    }
+  }
+  @keyframes blink {
+    0% {
+      background: red;
+    }
+    100% {
+      background: lightblue;
+    }
+  }
+  

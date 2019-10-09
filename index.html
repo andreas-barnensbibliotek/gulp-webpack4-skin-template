@@ -1,9 +1,38 @@
 <html>
     <head>
-
+<link href="skin.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
-    
-<script src="public/js/aj_bokemonspel.2.0.js"></script>
+        <div id="maincontainer" style="height:400px; width:400px;overflow:hidden;">
+            <div class="hamburguer-container"></div>
+            <div class="score-life-container">
+              <div class="score">0</div>
+              <div class="life"></div>
+              <div class="life"></div>
+              <div class="life"></div>
+              <div class="life"></div>
+              <div class="life"></div>
+            </div>
+            <div class="game-start-wrapper">
+              <div class="game-over">
+                <div class="game-over__message">Jaga bort bokdrakarna!</div>
+                <div class="game-over__start">Klicka här för att starta!</div>
+              </div>
+            </div>
+            <div class="game-over-wrapper">
+              <div class="game-over">
+                <div class="game-over__message">GAME OVER</div>
+                <div class="game-over__restart">Klicka här för att starta om</div>
+              </div>
+            </div>
+              <div class="game-win-wrapper">
+              <div class="game-over">
+                <div class="game-over__message">Du klarade det!</div>
+                <div class="game-over__restart">Klicka här för att starta igen</div>
+              </div>
+            </div>
+            </div>
+
+            <script src="public/js/aj_bokemonspel.2.0.js"></script>
     </body>
 </html>
