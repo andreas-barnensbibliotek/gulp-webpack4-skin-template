@@ -1,9 +1,16 @@
+import lvlSettings from './components/Levelsettings';
+import levelsettings from './components/Levelsettings';
+
 $(function() {
 	const bibblomonspel = function() {
 		let mainscore;
-		let _numbtowin = 20;
+		let _numbtowin;
 		let startStop = false;
 		let $Score;
+
+		let lvlObj = levelsettings();
+
+		function init() {}
 
 		function DOMHandler() {
 			$Score = $('.score');
@@ -15,13 +22,13 @@ $(function() {
 			let animationDuration = animationcmd(); //getRandomBetween(2.0, 1.5);
 			let rainInterval = getRainInterval();
 			let rnditm = getRandom();
-			if (rnditm <= 0.5) {
-				klickbibblomon(animationEnd, left, animationDuration);
-			} else {
-				klickdrake(animationEnd, left, animationDuration);
-			}
 
 			if (startStop) {
+				if (rnditm <= 0.5) {
+					klickbibblomon(animationEnd, left, animationDuration);
+				} else {
+					klickdrake(animationEnd, left, animationDuration);
+				}
 				setTimeout(rain, rainInterval);
 			}
 		}
@@ -62,12 +69,11 @@ $(function() {
 		function updateLife() {
 			$('.life:first').remove();
 			if (mainscore >= _numbtowin) {
-				$('.life').remove();
-				$('.game-win-wrapper').show();
-				startStop = false;
-				return;
+				return levelup();
 			} else {
 				if ($('.life').length == 0) {
+					lvlObj.restartlvl();
+					_numbtowin = lvlObj.svarighet(1).numbtowin;
 					$('.game-over-wrapper').show();
 					startStop = false;
 					return;
@@ -79,8 +85,56 @@ $(function() {
 			}, 100);
 		}
 
+		function levelup() {
+			if (startStop) {
+				if (lvlObj.canlevelup()) {
+					$('.life').remove();
+					$('.showlvl').html(lvlObj.currentlvl);
+
+					lvlObj.setlvl(1); // uppdatera level med 1
+					$('.lvlmal').html(lvlObj.svarighet(lvlObj.currentlvl()).numbtowin);
+
+					$('.game-lvlup-wrapper').show();
+					startStop = false;
+				} else {
+					$('.life').remove();
+					$('.game-win-wrapper').show();
+
+					lvlObj.restartlvl();
+					_numbtowin = lvlObj.svarighet(1).numbtowin;
+
+					startStop = false;
+				}
+			}
+
+			return;
+		}
+
+		// function updateLife() {
+		// 	$('.life:first').remove();
+		// 	if (mainscore >= _numbtowin) {
+		// 		$('.life').remove();
+		// 		$('.game-win-wrapper').show();
+		// 		startStop = false;
+		// 		return;
+		// 	} else {
+		// 		if ($('.life').length == 0) {
+		// 			$('.game-over-wrapper').show();
+		// 			startStop = false;
+		// 			return;
+		// 		}
+		// 	}
+		// 	$('body').addClass('blink');
+		// 	setTimeout(function() {
+		// 		$('body').removeClass('blink');
+		// 	}, 100);
+		// }
+
 		function init() {
 			DOMHandler();
+			lvlObj.setmaxlvl(4);
+			_numbtowin = lvlObj.svarighet(1).numbtowin;
+			console.log();
 			if (startStop) {
 				setTimeout(rain, 1000);
 			}
@@ -88,6 +142,8 @@ $(function() {
 
 		$('.game-over__restart').click(function() {
 			mainscore = 0;
+			console.log(lvlObj.currentlvl());
+			_numbtowin = lvlObj.svarighet(lvlObj.currentlvl()).numbtowin;
 			restart();
 		});
 
@@ -163,6 +219,7 @@ $(function() {
 		function hidemsg() {
 			$('.game-over-wrapper').hide();
 			$('.game-win-wrapper').hide();
+			$('.game-lvlup-wrapper').hide();
 			$('.game-start-wrapper').hide();
 		}
 
@@ -171,7 +228,10 @@ $(function() {
 		};
 	};
 
-	let gamesetting = {};
+	let gamesetting = {
+		draklevel: '7',
+		biblomonlevel: '1'
+	};
 
 	let bibSpelObj = bibblomonspel();
 	bibSpelObj.init;

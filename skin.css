@@ -59,7 +59,7 @@ html {
     margin-left: 3px;
   }
   
-  .game-over-wrapper , .game-win-wrapper {
+  .game-over-wrapper , .game-win-wrapper , .game-lvlup-wrapper{
     display: none;
     position: absolute;
     top: 0;
@@ -114,7 +114,9 @@ html {
     animation-name: up;
     animation-timing-function: linear;
   }
-  
+  .mestext{
+    font-size:1rem;
+  }
   @keyframes down {
     from {
       transform: rotate(0deg);
