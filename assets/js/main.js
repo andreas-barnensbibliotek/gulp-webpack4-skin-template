@@ -1,4 +1,4 @@
-import lvlSettings from './components/Levelsettings';
+import drpImgItm from './components/drpImgItm';
 import levelsettings from './components/Levelsettings';
 
 $(function() {
@@ -9,6 +9,7 @@ $(function() {
 		let $Score;
 
 		let lvlObj = levelsettings();
+		let drpImgObj = drpImgItm();
 
 		function init() {}
 
@@ -24,6 +25,31 @@ $(function() {
 			let rnditm = getRandom();
 
 			if (startStop) {
+				// if (rnditm <= 0.5) {
+				// 	klickImgItem(
+				// 		lvlObj.currentlvl(),
+				// 		'drake',
+				// 		animationEnd,
+				// 		left,
+				// 		animationDuration
+				// 	);
+				// } else {
+				// 	klickImgItem(
+				// 		lvlObj.currentlvl(),
+				// 		'bibblomon',
+				// 		animationEnd,
+				// 		left,
+				// 		animationDuration
+				// 	);
+				// }
+
+				// switch (rnditm) {
+				// 	case rnditm <= 0.5:
+				// 		klickbibblomon(animationEnd, left, animationDuration);
+				// 	default:
+				// 		klickdrake(animationEnd, left, animationDuration);
+				// }
+
 				if (rnditm <= 0.5) {
 					klickbibblomon(animationEnd, left, animationDuration);
 				} else {
@@ -211,6 +237,48 @@ $(function() {
 					updatedownScore();
 					$(this).remove();
 				})
+				.addClass('hamburguer hamburguer--down')
+				.css({ 'animation-duration': animationDuration + 's' })
+				.appendTo('.hamburguer-container');
+		}
+
+		function klickImgItem(lvl, typ, animationEnd, left, animationDuration) {
+			//let animationEnd = 'oanimationend animationend webkitAnimationEnd';
+			let $imgitem = $(
+				'<a style="height:50px; width:50px; display:block;"></a>'
+			);
+
+			$imgitem.css({
+				left: left + '%'
+			});
+
+			$imgitem.html(drpImgObj.rnddropitem(typ, lvl));
+
+			if ((typ = 'drake')) {
+				$imgitem
+					.bind(animationEnd, function() {
+						if ($(this).hasClass('hamburguer--down')) updateLife();
+						else updateScore();
+						$(this).remove();
+					})
+					.on('click touchstart mousedown', function(e) {
+						$(this)
+							.removeClass('hamburguer--down')
+							.css({ 'animation-duration': '0.5s' })
+							.addClass('hamburguer--up');
+					});
+			} else {
+				$imgitem
+					.bind(animationEnd, function() {
+						$(this).remove();
+					})
+					.on('click touchstart mousedown', function(e) {
+						updatedownScore();
+						$(this).remove();
+					});
+			}
+
+			$imgitem
 				.addClass('hamburguer hamburguer--down')
 				.css({ 'animation-duration': animationDuration + 's' })
 				.appendTo('.hamburguer-container');
