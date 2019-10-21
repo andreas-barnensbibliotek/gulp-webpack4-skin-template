@@ -1,11 +1,11 @@
 const levelsettings = () => {
 	let level = 1;
 	let maxlevel = 1;
+	let lifelvl = 1;
 
 	function setMaxLvl(lvl) {
-		maxlevel += lvl;
+		maxlevel = lvl - 1;
 	}
-
 	function setlvl(lvl) {
 		level += lvl;
 	}
@@ -14,6 +14,12 @@ const levelsettings = () => {
 	}
 	function getcurlvl() {
 		return level;
+	}
+	function setlifelevel(lvl) {
+		lifelvl = lvl;
+	}
+	function getlifelevel() {
+		return lifelvl;
 	}
 	function canlevelup() {
 		if (level <= maxlevel) {
@@ -34,6 +40,8 @@ const levelsettings = () => {
 		canlevelup: canlevelup,
 		restartlvl: restartlvl,
 		svarighet: svarighetsgrad,
+		setlifelevel: setlifelevel,
+		getlifelevel: getlifelevel,
 		alfvalue: 'detta är ett simpelt värde från hello test!'
 	};
 };

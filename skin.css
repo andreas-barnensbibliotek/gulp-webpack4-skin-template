@@ -34,6 +34,10 @@ html {
     animation: blink 0.5s linear;
   }
   
+  .blinkgreen {
+    animation: blinkgreen 0.5s linear;
+  }
+
   .score-life-container {
     position: absolute;
     top: 5%;
@@ -146,3 +150,11 @@ html {
     }
   }
   
+  @keyframes blinkgreen {
+    0% {
+      background: green;
+    }
+    100% {
+      background: lightblue;
+    }
+  }

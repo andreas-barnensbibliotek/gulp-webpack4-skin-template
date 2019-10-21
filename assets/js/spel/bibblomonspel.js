@@ -10,8 +10,6 @@ const bibblomonspel = function() {
 	let lvlObj = levelsettings();
 	let drpImgObj = drpImgItm();
 
-	function init() {}
-
 	function DOMHandler() {
 		$Score = $('.score');
 	}
@@ -25,7 +23,11 @@ const bibblomonspel = function() {
 
 		if (startStop) {
 			if (rnditm <= 0.5) {
-				klickbibblomon(animationEnd, left, animationDuration);
+				if (rnditm <= 0.1) {
+					klickPowerup(animationEnd, left, animationDuration);
+				} else {
+					klickbibblomon(animationEnd, left, animationDuration);
+				}
 			} else {
 				klickdrake(animationEnd, left, animationDuration);
 			}
@@ -78,9 +80,18 @@ const bibblomonspel = function() {
 				return;
 			}
 		}
-		$('body').addClass('blink');
+		$('#maincontainer').addClass('blink');
 		setTimeout(function() {
-			$('body').removeClass('blink');
+			$('#maincontainer').removeClass('blink');
+		}, 100);
+	}
+
+	function updateaddLife() {
+		let life = '<div class="life"></div>\n';
+		$('.score-life-container').append(life);
+		$('#maincontainer').addClass('blinkgreen');
+		setTimeout(function() {
+			$('#maincontainer').removeClass('blinkgreen');
 		}, 100);
 	}
 
@@ -109,9 +120,12 @@ const bibblomonspel = function() {
 		return;
 	}
 
-	function init() {
+	function init(levsetting) {
 		DOMHandler();
-		lvlObj.setmaxlvl(4);
+		lvlObj.setmaxlvl(levsetting.draklevel);
+		lvlObj.setlifelevel(levsetting.biblomonlevel);
+
+		lifehandler(lvlObj.getlifelevel());
 		_numbtowin = lvlObj.svarighet(1).numbtowin;
 		console.log();
 		if (startStop) {
@@ -136,10 +150,18 @@ const bibblomonspel = function() {
 		hidemsg();
 
 		$Score.text('0');
-		let life = '<div class="life"></div>\n';
-		$('.score-life-container').append(life + life + life + life + life);
+		// let life = '<div class="life"></div>\n';
+		// $('.score-life-container').append(life + life + life + life + life);
+		lifehandler(lvlObj.getlifelevel());
 		$('.hamburguer').remove();
 		setTimeout(rain, 1000);
+	}
+
+	function lifehandler(bibblemonlevel) {
+		let life = '<div class="life"></div>\n';
+		for (let i = 0; i < bibblemonlevel; i++) {
+			$('.score-life-container').append(life);
+		}
 	}
 
 	function getRandomBetween(min, max) {
@@ -195,41 +217,25 @@ const bibblomonspel = function() {
 			.appendTo('.hamburguer-container');
 	}
 
-	function klickImgItem(lvl, typ, animationEnd, left, animationDuration) {
-		//let animationEnd = 'oanimationend animationend webkitAnimationEnd';
-		let $imgitem = $('<a style="height:50px; width:50px; display:block;"></a>');
-
-		$imgitem.css({
-			left: left + '%'
-		});
-
-		$imgitem.html(drpImgObj.rnddropitem(typ, lvl));
-
-		if ((typ = 'drake')) {
-			$imgitem
-				.bind(animationEnd, function() {
-					if ($(this).hasClass('hamburguer--down')) updateLife();
-					else updateScore();
-					$(this).remove();
-				})
-				.on('click touchstart mousedown', function(e) {
-					$(this)
-						.removeClass('hamburguer--down')
-						.css({ 'animation-duration': '0.5s' })
-						.addClass('hamburguer--up');
-				});
-		} else {
-			$imgitem
-				.bind(animationEnd, function() {
-					$(this).remove();
-				})
-				.on('click touchstart mousedown', function(e) {
-					updatedownScore();
-					$(this).remove();
-				});
-		}
-
-		$imgitem
+	function klickPowerup(animationEnd, left, animationDuration) {
+		$('<a style="height:50px; width:50px; display:block;"></a>')
+			.css({
+				left: left + '%'
+			})
+			.html(
+				'<img alt="En lila bläckfisk som håller ett skrivblock och pennor i sina armar" src="/images/Blurp_bg_150px.png" title="En lila bläckfisk som håller ett skrivblock och pennor i sina armar" height="50" width="50">'
+			)
+			.bind(animationEnd, function() {
+				updateaddLife();
+				$(this).remove();
+			})
+			.on('click touchstart mousedown', function(e) {
+				let upAnimationDuration = '0.5s';
+				$(this)
+					.removeClass('hamburguer--down')
+					.css({ 'animation-duration': upAnimationDuration })
+					.addClass('hamburguer--up');
+			})
 			.addClass('hamburguer hamburguer--down')
 			.css({ 'animation-duration': animationDuration + 's' })
 			.appendTo('.hamburguer-container');
@@ -243,7 +249,7 @@ const bibblomonspel = function() {
 	}
 
 	return {
-		gameinit: init()
+		gameinit: init
 	};
 };
 
