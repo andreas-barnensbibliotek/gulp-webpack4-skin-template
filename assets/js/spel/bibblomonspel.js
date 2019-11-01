@@ -21,15 +21,23 @@ const bibblomonspel = function() {
 		let rainInterval = getRainInterval();
 		let rnditm = getRandom();
 
+		let objlvl = lvlObj.svarighet(lvlObj.currentlvl());
+
 		if (startStop) {
 			if (rnditm <= 0.5) {
-				if (rnditm <= 0.1) {
+				if (rnditm <= objlvl.powerups) {
+					// hur ofta +1 life skall droppas
 					klickPowerup(animationEnd, left, animationDuration);
 				} else {
-					klickbibblomon(animationEnd, left, animationDuration);
+					jagaDrake(animationEnd, left, animationDuration);
 				}
 			} else {
-				klickdrake(animationEnd, left, animationDuration);
+				let xtrachance = 1;
+				if (rnditm >= objlvl.baddrops) {
+					// hur ofta -2 item skall droppas
+					xtrachance = getRandomInteger(2); // här kan sättas om man vill ha -2 default eller mer
+				}
+				dontKlickFallingItem(animationEnd, left, animationDuration, xtrachance);
 			}
 			setTimeout(rain, rainInterval);
 		}
@@ -54,21 +62,24 @@ const bibblomonspel = function() {
 		mainscore = score;
 		$Score.text(score);
 		if (mainscore >= _numbtowin) {
-			updateLife();
+			updateLife(1);
 		}
 	}
 
-	function updatedownScore() {
+	function updatedownScore(Intloselife) {
 		let score = parseInt($Score.text());
 
 		mainscore = score;
 		$Score.text(score);
 
-		updateLife();
+		updateLife(Intloselife);
 	}
 
-	function updateLife() {
-		$('.life:first').remove();
+	function updateLife(lifes) {
+		for (let i = 0; i < lifes; i++) {
+			$('.life:first').remove();
+		}
+
 		if (mainscore >= _numbtowin) {
 			return levelup();
 		} else {
@@ -171,8 +182,11 @@ const bibblomonspel = function() {
 	function getRandom() {
 		return Math.random();
 	}
+	function getRandomInteger(max) {
+		return Math.floor(Math.random() * max + 1); // random 1 - max
+	}
 
-	function klickbibblomon(animationEnd, left, animationDuration) {
+	function jagaDrake(animationEnd, left, animationDuration) {
 		$('<a style="height:50px; width:50px; display:block;"></a>')
 			.css({
 				left: left + '%'
@@ -181,7 +195,7 @@ const bibblomonspel = function() {
 				'<img alt="En elak drake" src="/images/Drake8_150px.png" title="En elak drake" height="50" width="50">'
 			)
 			.bind(animationEnd, function() {
-				if ($(this).hasClass('hamburguer--down')) updateLife();
+				if ($(this).hasClass('hamburguer--down')) updateLife(1);
 				else updateScore();
 				$(this).remove();
 			})
@@ -197,19 +211,22 @@ const bibblomonspel = function() {
 			.appendTo('.hamburguer-container');
 	}
 
-	function klickdrake(animationEnd, left, animationDuration) {
+	function dontKlickFallingItem(
+		animationEnd,
+		left,
+		animationDuration,
+		Intloselife
+	) {
 		$('<a style="height:50px; width:50px; display:block;"></a>')
 			.css({
 				left: left + '%'
 			})
-			.html(
-				'<img alt="En lila bläckfisk som håller ett skrivblock och pennor i sina armar" src="/images/Blackfisken_Skriv_475w.png" title="En lila bläckfisk som håller ett skrivblock och pennor i sina armar" height="50" width="50">'
-			)
+			.html(drpImgObj.loseLifeImghtml(Intloselife))
 			.bind(animationEnd, function() {
 				$(this).remove();
 			})
 			.on('click touchstart mousedown', function(e) {
-				updatedownScore();
+				updatedownScore(Intloselife);
 				$(this).remove();
 			})
 			.addClass('hamburguer hamburguer--down')
@@ -226,11 +243,11 @@ const bibblomonspel = function() {
 				'<img alt="En lila bläckfisk som håller ett skrivblock och pennor i sina armar" src="/images/Blurp_bg_150px.png" title="En lila bläckfisk som håller ett skrivblock och pennor i sina armar" height="50" width="50">'
 			)
 			.bind(animationEnd, function() {
-				updateaddLife();
 				$(this).remove();
 			})
 			.on('click touchstart mousedown', function(e) {
 				let upAnimationDuration = '0.5s';
+				updateaddLife();
 				$(this)
 					.removeClass('hamburguer--down')
 					.css({ 'animation-duration': upAnimationDuration })

@@ -52,61 +52,71 @@ const levelgrader = {
 			lvl: 1,
 			numbtowin: 4,
 			hastighet: 1,
-			powerups: 0
+			powerups: 0.1,
+			baddrops: 0.88
 		},
 		{
 			lvl: 2,
 			numbtowin: 8,
 			hastighet: 1,
-			powerups: 0
+			powerups: 0.08,
+			baddrops: 0.88
 		},
 		{
 			lvl: 3,
 			numbtowin: 12,
 			hastighet: 1,
-			powerups: 0
+			powerups: 0.08,
+			baddrops: 0.88
 		},
 		{
 			lvl: 4,
 			numbtowin: 15,
 			hastighet: 1,
-			powerups: 0
+			powerups: 0.06,
+			baddrops: 0.78
 		},
 		{
 			lvl: 5,
 			numbtowin: 20,
 			hastighet: 1,
-			powerups: 0
+			powerups: 0.06,
+			baddrops: 0.6
 		},
 		{
 			lvl: 6,
 			numbtowin: 25,
 			hastighet: 1,
-			powerups: 0
+			powerups: 0.065,
+			baddrops: 0.59
 		},
 		{
 			lvl: 7,
 			numbtowin: 27,
 			hastighet: 1,
-			powerups: 0
+			powerups: 0.064,
+			baddrops: 0.54
 		},
 		{
 			lvl: 8,
 			numbtowin: 30,
 			hastighet: 1,
-			powerups: 0
+			powerups: 0.054,
+			baddrops: 0.56
 		},
 		{
 			lvl: 9,
 			numbtowin: 32,
 			hastighet: 1,
-			powerups: 0
+			powerups: 0.044,
+			baddrops: 0.54
 		},
 		{
 			lvl: 10,
 			numbtowin: 35,
 			hastighet: 1,
-			powerups: 0
+			powerups: 0.03,
+			baddrops: 0.5
 		}
 	]
 };

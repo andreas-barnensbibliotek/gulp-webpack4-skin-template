@@ -2,8 +2,8 @@ import bibblomonspel from './spel/bibblomonspel';
 
 $(function() {
 	let gamesetting = {
-		draklevel: '7',
-		biblomonlevel: '3'
+		draklevel: '10',
+		biblomonlevel: '7'
 	};
 
 	let bibSpelObj = bibblomonspel();

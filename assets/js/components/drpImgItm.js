@@ -115,8 +115,20 @@ const drpImgItm = () => {
 		return Math.round(Math.random() * antal);
 	}
 
+	function loseLifeImghtml(val) {
+		let retobj = '';
+		val -= 1;
+		if (val > 0) {
+			retobj = itmSrcList.bibblomon[3].img;
+		} else {
+			retobj = itmSrcList.bibblomon[0].img; //'<img alt="En lila bläckfisk som håller ett skrivblock och pennor i sina armar" src="/images/Blackfisken_Skriv_475w.png" title="En lila bläckfisk som håller ett skrivblock och pennor i sina armar" height="50" width="50">'
+		}
+		return retobj;
+	}
+
 	return {
 		rnddropitem: rnddropitem,
+		loseLifeImghtml: loseLifeImghtml,
 		alfvalue: 'detta är ett simpelt värde från hello test!'
 	};
 };
